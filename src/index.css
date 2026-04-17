@@ -1,0 +1,180 @@
+/**
+ * file: index.css
+ * description: YYC³ 全局样式入口 — Tailwind + 主题 + 自定义样式
+ * author: YanYuCloudCube Team <admin@0379.email>
+ * version v2.0.0
+ * updated 2026-04-05
+ */
+
+@import "tailwindcss";
+@import "tw-animate-css";
+@import './styles/fonts.css';
+@import './styles/theme.css';
+@import './styles/liquid-glass.css';
+@import './styles/aurora.css';
+
+/* ── Custom CSS variables (not in theme.css) ── */
+:root {
+  --color-primary: #3b82f6;
+  --color-secondary: #8b5cf6;
+  --color-success: #10b981;
+  --color-warning: #f59e0b;
+  --color-error: #ef4444;
+  --color-info: #06b6d4;
+  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  --font-family-mono: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+/* ── Layout root (theme.css handles body colors via CSS vars) ── */
+html,
+body,
+#root {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+body {
+  font-family: var(--font-family-base);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Scrollbar (dark theme) ── */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+/* ── Selection ── */
+::selection {
+  background-color: rgba(59, 130, 246, 0.3);
+  color: #ffffff;
+}
+
+/* ── Focus ring ── */
+:focus-visible {
+  outline: 2px solid var(--color-primary);
+  outline-offset: 2px;
+}
+
+/* ── Disabled state ── */
+:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ── Links ── */
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+a:hover {
+  color: #60a5fa;
+}
+
+/* ── Buttons (base reset) ── */
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+/* ── Form elements ── */
+input,
+textarea,
+select {
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+/* ── Code ── */
+code,
+pre {
+  font-family: var(--font-family-mono);
+}
+pre {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 4px;
+  padding: 12px;
+  overflow-x: auto;
+}
+code {
+  background-color: rgba(0, 0, 0, 0.3);
+  border-radius: 2px;
+  padding: 2px 4px;
+  font-size: 0.875em;
+}
+
+/* ── Images ── */
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+/* ── Tables ── */
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+th,
+td {
+  padding: 12px;
+  text-align: left;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+th {
+  font-weight: 600;
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* ── Animations ── */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@keyframes slideInUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+@keyframes slideInDown {
+  from { transform: translateY(-20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+.animate-fadeIn { animation: fadeIn 0.3s ease-in-out; }
+.animate-slideInUp { animation: slideInUp 0.3s ease-out; }
+.animate-slideInDown { animation: slideInDown 0.3s ease-out; }
+
+/* ── Utility classes ── */
+.text-gradient {
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+.glass-effect {
+  background: rgba(255, 255, 255, 0.05);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ── Responsive font size ── */
+@media (max-width: 640px) { html { font-size: 14px; } }
+@media (min-width: 641px) and (max-width: 1024px) { html { font-size: 15px; } }
+@media (min-width: 1025px) { html { font-size: 16px; } }
