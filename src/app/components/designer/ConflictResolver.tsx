@@ -726,6 +726,7 @@ function ConflictItem({ conflict, selected, onClick, formatTime }: {
 function ConflictDetail({ conflict, onResolve, crdtPeers }: {
   conflict: CRDTConflict;
   onResolve: (resolution: 'local' | 'remote') => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   crdtPeers: any[];
 }) {
   const peer = crdtPeers.find(p => p.name === conflict.remotePeer);

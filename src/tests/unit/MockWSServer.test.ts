@@ -22,6 +22,7 @@ describe('MockWSServer — 模拟 WebSocket 服务器', () => {
     try {
       const mod = await import('../../app/testing/MockWSServer');
       expect(mod).toBeDefined();
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
       // yjs 在测试环境中可能不可用
       console.warn('MockWSServer import skipped:', e.message);

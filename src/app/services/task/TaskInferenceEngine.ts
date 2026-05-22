@@ -210,6 +210,7 @@ export class TaskInferenceEngine {
 
       const parsed = this.parseAIResponse(content);
       if (parsed.length > 0) {
+        // eslint-disable-next-line no-console
         console.info(`[TaskInference] AI extracted ${parsed.length} tasks via ${provider.displayName}/${modelName}`);
         return parsed;
       }
@@ -230,6 +231,7 @@ export class TaskInferenceEngine {
       const jsonMatch = cleaned.match(/\[[\s\S]*\]/);
       if (!jsonMatch) return [];
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const items: any[] = JSON.parse(jsonMatch[0]);
       return items
         .filter(item => item && item.title && (item.confidence ?? 0.8) >= 0.5)
@@ -238,7 +240,9 @@ export class TaskInferenceEngine {
             title: String(item.title).slice(0, 200),
             description: item.description || undefined,
             status: 'todo' as const,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             priority: (['critical', 'high', 'medium', 'low'].includes(item.priority) ? item.priority : 'medium') as any,
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             type: (['feature', 'bug', 'refactor', 'test', 'documentation', 'other'].includes(item.type) ? item.type : 'other') as any,
             estimatedHours: typeof item.estimatedHours === 'number' ? item.estimatedHours : undefined,
             tags: Array.isArray(item.tags) ? item.tags.map(String) : ['AI'],
@@ -315,7 +319,9 @@ export class TaskInferenceEngine {
             title,
             description: `从代码注释 ${tag} 中提取`,
             status: 'todo',
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             priority: (priorityMap[tag] as any) || 'medium',
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             type: (typeMap[tag] as any) || 'other',
             tags: [tag, 'code'],
           },

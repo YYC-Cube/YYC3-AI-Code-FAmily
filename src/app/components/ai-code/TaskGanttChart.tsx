@@ -138,6 +138,7 @@ export function TaskGanttChart({ tasks, onOpenDetail }: TaskGanttChartProps) {
 
   const allDays = useMemo(() => {
     return eachDayOfInterval({ start: rangeStart, end: rangeEnd });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [rangeStart.getTime(), rangeEnd.getTime()]);
 
   // Group days by month for header

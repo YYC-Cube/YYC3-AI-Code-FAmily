@@ -45,6 +45,7 @@ describe('apiClient.ts — API 客户端', () => {
   describe('拦截器', () => {
     it('TC-API-010: addRequestInterceptor 返回卸载函数', async () => {
       const { addRequestInterceptor } = await import('../../app/apiClient');
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const interceptor = (config: any) => ({ ...config, headers: { ...config.headers, 'X-Custom': 'yes' } });
       const remove = addRequestInterceptor(interceptor);
       expect(typeof remove).toBe('function');
@@ -53,6 +54,7 @@ describe('apiClient.ts — API 客户端', () => {
 
     it('TC-API-011: addResponseInterceptor 返回卸载函数', async () => {
       const { addResponseInterceptor } = await import('../../app/apiClient');
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const interceptor = (resp: any) => ({ ...resp, _intercepted: true });
       const remove = addResponseInterceptor(interceptor);
       expect(typeof remove).toBe('function');

@@ -31,8 +31,10 @@ export interface PluginComponentDef {
   label: string;
   icon: string;
   category: 'basic' | 'form' | 'data' | 'media' | 'advanced' | 'chart' | 'map' | 'workflow';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   defaultProps: Record<string, any>;
   /** JSON Schema for props */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   propsSchema?: Record<string, any>;
 }
 

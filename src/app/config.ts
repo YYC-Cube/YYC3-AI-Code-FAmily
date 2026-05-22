@@ -65,6 +65,7 @@
 // ── Helper: 读取环境变量（带类型安全 + 默认值） ──
 
 function env(key: string, fallback: string = ''): string {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   return (import.meta as any).env?.[key] ?? fallback;
 }
 

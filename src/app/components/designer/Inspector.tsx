@@ -241,6 +241,7 @@ export function Inspector() {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function PropsEditor({ component, onUpdate, readOnly = false }: { component: any; onUpdate: (id: string, props: Record<string, any>) => void; readOnly?: boolean }) {
   const t = useThemeTokens();
   return (
@@ -261,6 +262,7 @@ function PropsEditor({ component, onUpdate, readOnly = false }: { component: any
             </button>
           ) : Array.isArray(value) ? (
             <div className="space-y-1">
+              {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
               {(value as any[]).map((item, idx) => (
                 <input
                   key={idx}
@@ -268,6 +270,7 @@ function PropsEditor({ component, onUpdate, readOnly = false }: { component: any
                   readOnly={readOnly}
                   onChange={(e) => {
                     if (readOnly) return;
+                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     const newArr = [...value as any[]];
                     newArr[idx] = e.target.value;
                     onUpdate(component.id, { [key]: newArr });
@@ -298,6 +301,7 @@ function PropsEditor({ component, onUpdate, readOnly = false }: { component: any
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function PanelPropsEditor({ panel }: { panel: any }) {
   const t = useThemeTokens();
   return (
@@ -366,6 +370,7 @@ function StyleEditor({ readOnly = false }: { readOnly?: boolean }) {
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function EventsEditor({ component, readOnly = false }: { component: any; readOnly?: boolean }) {
   const t = useThemeTokens();
   const events = [
@@ -395,6 +400,7 @@ function EventsEditor({ component, readOnly = false }: { component: any; readOnl
   );
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function AIPropsAssist({ component, readOnly = false }: { component: any; readOnly?: boolean }) {
   const t = useThemeTokens();
   const {
@@ -516,6 +522,7 @@ function AIPropsAssist({ component, readOnly = false }: { component: any; readOn
     const match = suggestion.match(/\((\w+):\s*(.+?)\)/);
     if (match) {
       const key = match[1];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       let val: any = match[2].trim();
       // Parse value
       if (val === 'true') val = true;

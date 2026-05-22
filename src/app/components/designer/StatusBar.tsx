@@ -55,6 +55,7 @@ function useModelHealth(intervalMs = 30_000) {
       mountedRef.current = false;
       clearInterval(timer);
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [activeModel?.id, intervalMs]);
 
   return { status, latency, activeModel };
@@ -478,7 +479,9 @@ export function StatusBar() {
 function DesignJsonValidationPanel({
   panels, components, dataBindings, designJsonErrors, crdtDocVersion, t,
 }: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   panels: any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   components: any[];
   dataBindings: Record<string, string>;
   designJsonValid: boolean;

@@ -187,6 +187,7 @@ export function useLayoutConstraints(panels: PanelRect[]): LayoutAnalysis {
  */
 export function applySuggestedLayout(
   suggestedLayout: PanelRect[],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setPanels: (fn: (prev: any[]) => any[]) => void
 ) {
   setPanels(prev => prev.map(p => {

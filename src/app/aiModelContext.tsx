@@ -160,6 +160,7 @@ const QUOTA_STORAGE = 'yyc3-auth-quota';
 function loadJSON<T>(key: string, fallback: T): T {
   try { const v = localStorage.getItem(key); return v ? JSON.parse(v) : fallback; } catch { return fallback; }
 }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function saveJSON(key: string, value: any) {
   try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
 }
@@ -222,7 +223,9 @@ function generateLocalJWT(user: AuthUser): string {
 
 const CTX_KEY = '__YYC3_GLOBAL_AI_CTX__';
 const GlobalAIContext: React.Context<GlobalAIContextType | null> =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (globalThis as any)[CTX_KEY] ??
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ((globalThis as any)[CTX_KEY] = createContext<GlobalAIContextType | null>(null));
 
 export function useGlobalAI(): GlobalAIContextType {

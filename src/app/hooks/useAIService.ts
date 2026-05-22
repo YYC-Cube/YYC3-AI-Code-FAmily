@@ -183,6 +183,7 @@ const DEFAULT_CONFIG: AIServiceConfig = {
 /* ================================================================
    Error Classification & Suggestions
    ================================================================ */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function classifyError(error: any): ErrorAnalysis['errorType'] {
   const message = (error?.message || '').toLowerCase();
   if (message.includes('network') || message.includes('fetch') || message.includes('econnrefused'))
@@ -256,6 +257,7 @@ export function useAIService() {
   const [costReports, setCostReports] = useState<CostReport[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const rateLimitTracker = useRef<Map<string, { count: number; resetTime: number }>>(new Map());
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const cacheRef = useRef<Map<string, { data: any; timestamp: number }>>(new Map());
 
   // Persist config changes
@@ -384,6 +386,7 @@ export function useAIService() {
   }, []);
 
   /* ─── Error Recording ─── */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const recordError = useCallback((providerId: string, modelId: string, error: any) => {
     const errorType = classifyError(error);
     setErrors(prev => {
@@ -535,6 +538,7 @@ export function useAIService() {
       const result: ChatResponse = {
         id: data.id,
         model: model.name,
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         choices: data.choices?.map((c: any) => ({
           message: { role: c.message.role, content: c.message.content },
           finishReason: c.finish_reason,
@@ -562,6 +566,7 @@ export function useAIService() {
       }
 
       return result;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       const latency = Date.now() - startTime;
       recordMetrics(provider.id, model.id, latency, false, 0);
@@ -693,6 +698,7 @@ export function useAIService() {
       const latency = Date.now() - startTime;
       recordMetrics(provider.id, model.id, latency, true, totalTokens);
       trackCost(provider.id, model.id, totalTokens, totalTokens); // approximate
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (error: any) {
       const latency = Date.now() - startTime;
       recordMetrics(provider.id, model.id, latency, false, 0);

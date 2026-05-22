@@ -108,6 +108,7 @@ function collectWebVitals(
     const fidObs = new PerformanceObserver((list) => {
       const entries = list.getEntries();
       if (entries.length > 0) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const entry = entries[0] as any;
         onUpdate('fid', entry.processingStart - entry.startTime);
       }
@@ -121,7 +122,9 @@ function collectWebVitals(
     let clsValue = 0;
     const clsObs = new PerformanceObserver((list) => {
       for (const entry of list.getEntries()) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         if (!(entry as any).hadRecentInput) {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           clsValue += (entry as any).value;
         }
       }
@@ -297,6 +300,7 @@ export function usePerformanceMonitor(enabled: boolean = true) {
 
     // Memory + DOM monitoring
     const memoryInterval = setInterval(() => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const perf = performance as any;
       if (perf.memory) {
         const usage = perf.memory.usedJSHeapSize / perf.memory.jsHeapSizeLimit;

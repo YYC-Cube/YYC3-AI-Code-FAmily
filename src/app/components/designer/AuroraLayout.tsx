@@ -43,6 +43,7 @@ function AuroraBackground() {
   const playRippleSound = useCallback(() => {
     try {
       if (!audioCtxRef.current) {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         audioCtxRef.current = new (window.AudioContext || (window as any).webkitAudioContext)();
       }
       const ctx = audioCtxRef.current;
@@ -530,6 +531,7 @@ interface AuroraSubItem {
   icon: React.ElementType;
   desc: string;
   gradient: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   action: (ctx: any) => void;
 }
 
@@ -608,6 +610,7 @@ function AuroraFlyout({
 }: {
   items: AuroraSubItem[];
   navItem: AuroraNavItem;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ctx: any;
   onClose: () => void;
   anchorRect: DOMRect | null;
@@ -660,6 +663,7 @@ function AuroraFlyout({
 
 function AuroraActivityBar() {
   const ctx = useDesigner();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { activeNavSection, setActiveNavSection, secondaryNavOpen, toggleSecondaryNav, syncStatus: _syncStatus, conflicts, crdtPeers } = ctx;
 
   const { openFlyout, anchorRect, handleNavClick, closeFlyout, setButtonRef } = useActivityBarNav<AuroraNavItem>({

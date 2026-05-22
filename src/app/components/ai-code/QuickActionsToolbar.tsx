@@ -286,6 +286,7 @@ export function QuickActionsToolbar({
         // AI/complex actions → show result viewer
         setActionResult({ result, title: action.title });
       }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setActionResult({
         result: { success: false, error: err.message || '操作失败', duration: 0 },

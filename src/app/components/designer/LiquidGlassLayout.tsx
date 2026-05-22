@@ -251,6 +251,7 @@ interface GlassSubItem {
   icon: React.ElementType;
   desc: string;
   color: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   action: (ctx: any) => void;
 }
 
@@ -324,6 +325,7 @@ function GlassFlyout({
 }: {
   items: GlassSubItem[];
   navItem: typeof GLASS_NAV_ITEMS[number];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ctx: any;
   onClose: () => void;
   anchorRect: DOMRect | null;

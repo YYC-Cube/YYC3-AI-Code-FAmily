@@ -94,6 +94,7 @@ class SimulatedWebSocket {
   }
 
   // Simulate awareness update
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   sendAwareness(data: any) {
     if (!this._connected) return;
     setTimeout(() => {
@@ -110,6 +111,7 @@ class SimulatedWebSocket {
     this.listeners.get(event)?.delete(fn);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private emit(event: string, data: any) {
     this.listeners.get(event)?.forEach(fn => fn(data));
   }
@@ -187,6 +189,7 @@ export function useYjsBinding(
           Object.entries(c).forEach(([k, v]) => {
             if (k === 'props') {
               const yProps = new Y.Map();
+              // eslint-disable-next-line @typescript-eslint/no-explicit-any
               Object.entries(v as Record<string, any>).forEach(([pk, pv]) => {
                 yProps.set(pk, pv);
               });
@@ -218,6 +221,7 @@ export function useYjsBinding(
 
       // Read panels from Y.Doc
       const newPanels: Panel[] = [];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       yPanels.forEach((yPanel: any, key: string) => {
         if (yPanel instanceof Y.Map) {
           const childArr = yPanel.get('children');
@@ -236,11 +240,14 @@ export function useYjsBinding(
 
       // Read components from Y.Doc
       const newComponents: ComponentInstance[] = [];
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       yComponents.forEach((yComp: any, key: string) => {
         if (yComp instanceof Y.Map) {
           const yProps = yComp.get('props');
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const props: Record<string, any> = {};
           if (yProps instanceof Y.Map) {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             yProps.forEach((v: any, k: string) => { props[k] = v; });
           }
           newComponents.push({
@@ -306,6 +313,7 @@ export function useYjsBinding(
       ws.on('close', () => {
         setState(prev => ({ ...prev, connected: false }));
       });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ws.on('message', (msg: any) => {
         addMessage({
           direction: 'in',
@@ -338,6 +346,7 @@ export function useYjsBinding(
     function tryRealWs() {
       if (wsAttemptIdx >= WS_ENDPOINTS.length || wsConnected) {
         if (!wsConnected) {
+          // eslint-disable-next-line no-console
           console.log('[YYC³ CRDT] All real WS endpoints failed, using simulated WebSocket');
           setupSimulated();
         }
@@ -346,6 +355,7 @@ export function useYjsBinding(
 
       const url = WS_ENDPOINTS[wsAttemptIdx];
       const wsUrl = url.replace(/\/$/, '') + '/yjs-ws';
+      // eslint-disable-next-line no-console
       console.log(`[YYC³ CRDT] Attempting real WebSocket: ${wsUrl}`);
 
       try {
@@ -364,6 +374,7 @@ export function useYjsBinding(
           clearTimeout(timeout);
           wsConnected = true;
           realWs = candidate;
+          // eslint-disable-next-line no-console
           console.log(`[YYC³ CRDT] Real WebSocket connected: ${wsUrl}`);
           setState(prev => ({ ...prev, connected: true }));
           addMessage({ direction: 'in', type: 'sync-step1', size: 0, timestamp: Date.now() });
@@ -381,6 +392,7 @@ export function useYjsBinding(
           clearTimeout(timeout);
           if (wsConnected && realWs === candidate) {
             // Connection was active then lost — fall back to simulated
+            // eslint-disable-next-line no-console
             console.log('[YYC³ CRDT] Real WebSocket closed, switching to simulated');
             wsConnected = false;
             realWs = null;
@@ -441,6 +453,7 @@ export function useYjsBinding(
     doc.transact(() => {
       // Sync panels
       const existingPanelIds = new Set<string>();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       yPanels.forEach((_: any, key: string) => existingPanelIds.add(key));
 
       const newPanelIds = new Set(newPanels.map(p => p.id));
@@ -452,6 +465,7 @@ export function useYjsBinding(
 
       // Update/add panels
       newPanels.forEach(p => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let yPanel = yPanels.get(p.id) as Y.Map<any> | undefined;
         if (!yPanel || !(yPanel instanceof Y.Map)) {
           yPanel = new Y.Map();
@@ -478,6 +492,7 @@ export function useYjsBinding(
 
       // Sync components
       const existingCompIds = new Set<string>();
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       yComponents.forEach((_: any, key: string) => existingCompIds.add(key));
 
       const newCompIds = new Set(newComponents.map(c => c.id));
@@ -487,6 +502,7 @@ export function useYjsBinding(
       });
 
       newComponents.forEach(c => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let yComp = yComponents.get(c.id) as Y.Map<any> | undefined;
         if (!yComp || !(yComp instanceof Y.Map)) {
           yComp = new Y.Map();
@@ -498,6 +514,7 @@ export function useYjsBinding(
         yComp.set('panelId', c.panelId);
         if (c.groupId) yComp.set('groupId', c.groupId);
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         let yProps = yComp.get('props') as Y.Map<any> | undefined;
         if (!yProps || !(yProps instanceof Y.Map)) {
           yProps = new Y.Map();

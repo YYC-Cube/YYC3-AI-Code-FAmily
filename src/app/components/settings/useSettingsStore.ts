@@ -148,6 +148,7 @@ export interface SearchResult {
   path: string;
   title: string;
   description?: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   value: any;
   type: 'setting' | 'agent' | 'mcp' | 'model' | 'rule' | 'skill';
   section: string;
@@ -167,6 +168,7 @@ export function searchSettings(settings: Settings, query: string): SearchResult[
   };
   for (const [k, label] of Object.entries(gMap)) {
     if (label.toLowerCase().includes(lq)) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       results.push({ path: `general.${k}`, title: label, value: (settings.general as any)[k], type: 'setting', section: 'general' });
     }
   }
@@ -197,6 +199,7 @@ export function searchSettings(settings: Settings, query: string): SearchResult[
   };
   for (const [k, label] of Object.entries(cMap)) {
     if (label.toLowerCase().includes(lq)) {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       results.push({ path: `conversation.${k}`, title: label, value: (settings.conversation as any)[k], type: 'setting', section: 'conversation' });
     }
   }

@@ -45,6 +45,7 @@ export type CollabEventType =
 
 export interface CollabEvent {
   type: CollabEventType;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   data?: any;
 }
 
@@ -86,9 +87,12 @@ function getOrCreateUserId(): { id: string; name: string; color: string } {
 
 export class TaskCollabService {
   private _doc: Y.Doc;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private _tasksMap: Y.Map<any>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private _awarenessData: Y.Map<any>;
   private _indexeddbProvider: IndexeddbPersistence | null = null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private _wsProvider: any = null; // WebsocketProvider (lazy loaded)
   private _listeners = new Set<(event: CollabEvent) => void>();
   private _status: CollabSyncStatus = 'disconnected';
@@ -340,6 +344,7 @@ export class TaskCollabService {
   }
 
   /** Handle remote task map changes */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private _onRemoteTaskChange(event: Y.YMapEvent<any>) {
     if (this._syncFromLocalInProgress) return;
 

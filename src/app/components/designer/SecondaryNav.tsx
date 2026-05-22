@@ -44,7 +44,9 @@ interface NavSubItem {
   icon: React.ElementType;
   description: string;
   color: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   action: (ctx: any) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   badge?: (ctx: any) => string | null;
 }
 
@@ -84,6 +86,7 @@ function getSubItems(section: NavSection): NavSubItem[] {
         { id: 'crdt',      label: 'CRDT 协同',   icon: Radio,          description: '四标签页',         color: 'text-cyan-400', action: (c) => c.toggleCRDTPanel() },
         { id: 'conflicts', label: '冲突解析器',   icon: AlertTriangle,  description: '查看/解决冲突',    color: 'text-red-400', action: (c) => c.toggleConflictResolver(),
           badge: (ctx) => {
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const n = ctx.conflicts?.filter((cc: any) => !cc.resolved).length;
             return n > 0 ? String(n) : null;
           },

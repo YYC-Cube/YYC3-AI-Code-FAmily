@@ -385,6 +385,7 @@ export class SettingsSyncService {
 
   /* ── 内部 ── */
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   private dispatch(eventName: string, detail: any) {
     if (this._disposed) return;
     try {

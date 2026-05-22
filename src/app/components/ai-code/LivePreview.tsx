@@ -51,6 +51,7 @@ function ensureBabel(): Promise<void> {
   if (_babelPromise) return _babelPromise;
   _babelPromise = import('@babel/standalone')
     .then((mod) => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       (window as any).__Babel = mod;
       _babelReady = true;
     })
@@ -60,6 +61,7 @@ function ensureBabel(): Promise<void> {
         const s = document.createElement('script');
         s.src = 'https://unpkg.com/@babel/standalone@7/babel.min.js';
         s.onload = () => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           (window as any).__Babel = (window as any).Babel;
           _babelReady = true;
           resolve();
@@ -74,6 +76,7 @@ function ensureBabel(): Promise<void> {
 interface TranspileResult { code: string | null; error: string | null }
 
 function transpileCode(source: string): TranspileResult {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const Babel = (window as any).__Babel;
   if (!Babel) return { code: null, error: 'Babel not loaded' };
   try {
@@ -84,6 +87,7 @@ function transpileCode(source: string): TranspileResult {
       filename: 'preview.tsx',
     });
     return { code: result.code, error: null };
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     return { code: null, error: err.message || String(err) };
   }
@@ -486,6 +490,7 @@ export function LivePreview({
 
   // History
   const historyRef = useRef<Snapshot[]>([]);
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_historyVer, setHistoryVer] = useState(0);            // force re-render
   const idxRef = useRef(-1);
   const sid = useRef(0);

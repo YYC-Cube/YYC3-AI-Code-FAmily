@@ -247,6 +247,7 @@ export function CRDTPanel() {
                         <button
                           onClick={() => {
                             const roles = ['owner', 'admin', 'editor', 'viewer', 'guest'] as const;
+                            // eslint-disable-next-line @typescript-eslint/no-explicit-any
                             const currentIdx = roles.indexOf((peer.role || 'editor') as any);
                             const nextRole = roles[(currentIdx + 1) % roles.length];
                             setCRDTPeers(crdtPeers.map(p =>

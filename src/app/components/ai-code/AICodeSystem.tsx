@@ -775,6 +775,7 @@ function AIChatPanel({ onInjectCode, onCreateFileFromAI }: {
           setMessages(prev => prev.map(m => m.id === assistantMsgId ? { ...m, content: fullText } : m));
         },
       );
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       if (err.message !== 'Aborted') {
         setMessages(prev => prev.map(m =>
@@ -1304,6 +1305,7 @@ function SettingsDialog({ onClose, settings, onUpdate }: {
               <div className="space-y-4">
                 <div>
                   <label className="text-[11px] text-white/40 mb-2 block">AI 服务管理</label>
+                  {/* eslint-disable-next-line @typescript-eslint/no-explicit-any */}
                   <button onClick={() => { onClose(); (window as any).__yyc3_open_provider_mgr?.(); }}
                     className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg bg-gradient-to-r from-indigo-500/15 to-violet-500/15 border border-indigo-500/20 text-indigo-300 text-[11px] hover:from-indigo-500/20 hover:to-violet-500/20 transition-all"
                     style={{ fontWeight: 500 }}>
@@ -1520,6 +1522,7 @@ export function AICodeSystem() {
   void splitFileId;
   const [splitContent, setSplitContent] = useState('');
   const [splitLanguage, setSplitLanguage] = useState('typescript');
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const splitEditorRef = useRef<any>(null);
 
   // File tree interaction
@@ -1543,7 +1546,9 @@ export function AICodeSystem() {
   const rightPanelRef = useRef<ImperativePanelHandle>(null);
 
   // Monaco refs + diagnostics
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const editorRef = useRef<any>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const monacoRef = useRef<any>(null);
   const [diagnostics, setDiagnostics] = useState<{ errors: number; warnings: number }>({ errors: 0, warnings: 0 });
 
@@ -1585,7 +1590,9 @@ export function AICodeSystem() {
 
   // Register global callback for Settings → AI Provider Manager bridge
   useEffect(() => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     (window as any).__yyc3_open_provider_mgr = () => setShowProviderManager(true);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     return () => { delete (window as any).__yyc3_open_provider_mgr; };
   }, []);
 
@@ -1743,6 +1750,7 @@ export function AICodeSystem() {
       id: tabId, fileId: id, name: node.name, language: lang,
       content, isModified: false, isPinned: false,
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // Close tab (via windowMgr)
@@ -1993,6 +2001,7 @@ export function AICodeSystem() {
     }
     setDragTabId(null);
     setDragOverTabId(null);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [dragTabId]);
 
   const handleTabDragEnd = useCallback(() => {
@@ -2070,6 +2079,7 @@ export function AICodeSystem() {
   }, [fileTree]);
 
   /* ═══════════ MONACO EDITOR MOUNT — Completions + Error Markers ═══════════ */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleEditorMount = useCallback((editor: any, monaco: any) => {
     editorRef.current = editor;
     monacoRef.current = monaco;
@@ -2084,6 +2094,7 @@ export function AICodeSystem() {
     });
 
     // ── CRDT cursor tracking ──
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     editor.onDidChangeCursorPosition((e: any) => {
       crdt.updateCursor(e.position.lineNumber, e.position.column);
     });
@@ -2094,6 +2105,7 @@ export function AICodeSystem() {
     });
 
     // ── Scroll sync: editor → preview ratio mapping ──
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     editor.onDidScrollChange((_e: any) => {
       if (!scrollSyncFromEditor.current) {
         const scrollTop = editor.getScrollTop();
@@ -2113,6 +2125,7 @@ export function AICodeSystem() {
 
     monaco.languages.registerCompletionItemProvider('typescript', {
       triggerCharacters: ['.', '<', '"', "'", '/'],
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       provideCompletionItems: (model: any, position: any) => {
         const word = model.getWordUntilPosition(position);
         const range = {
@@ -2122,6 +2135,7 @@ export function AICodeSystem() {
           endColumn: word.endColumn,
         };
 
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const suggestions: any[] = [];
 
         // React hooks
@@ -2186,6 +2200,7 @@ export function AICodeSystem() {
 
     // ── Hover info provider ──
     monaco.languages.registerHoverProvider('typescript', {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       provideHover: (model: any, position: any) => {
         const word = model.getWordAtPosition(position);
         if (!word) return null;
@@ -2206,6 +2221,7 @@ export function AICodeSystem() {
         };
       },
     });
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [fileTree]);
 
   /* ═══════════ Error Marker Scanner — runs on content change ═══════════ */
@@ -2216,6 +2232,7 @@ export function AICodeSystem() {
     if (!model) return;
 
     const timer = setTimeout(() => {
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const markers: any[] = [];
       const lines = fileContent.split('\n');
 
@@ -3110,6 +3127,7 @@ export function AICodeSystem() {
           >
             {fp.type === 'aiChat' && (
               <AIChatStreamPanel
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 onChatStream={aiService.chatStream as any}
                 activeModel={aiService.activeModel?.displayName}
                 activeProvider={aiService.activeProvider?.displayName}

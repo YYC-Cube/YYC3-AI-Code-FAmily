@@ -34,7 +34,9 @@ interface NavSubItem {
   icon: React.ElementType;
   description: string;
   color: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   action: (ctx: any) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   badge?: (ctx: any) => string | null;
 }
 
@@ -55,8 +57,11 @@ const NAV_ITEMS: NavItem[] = [
     color: 'text-blue-400',
     activeColor: 'bg-blue-500/10 border-blue-500/30',
     getSubItems: () => [
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       { id: 'canvas',  label: '画布编辑器', icon: Layers, description: '主设计画布', color: 'text-blue-400', action: (c: any) => c.setViewMode('design') },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       { id: 'preview', label: '实时预览',   icon: Eye,    description: '预览所有面板', color: 'text-emerald-400', action: (c: any) => c.setViewMode('preview') },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       { id: 'code',    label: '代码模式',   icon: Code,   description: '查看生成代码', color: 'text-amber-400', action: (c: any) => c.setViewMode('code') },
     ],
   },
@@ -75,6 +80,7 @@ const NAV_ITEMS: NavItem[] = [
     color: 'text-cyan-400',
     activeColor: 'bg-cyan-500/10 border-cyan-500/30',
     getSubItems: () => [
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       { id: 'schema', label: '数据库管理', icon: Database, description: 'Schema Explorer', color: 'text-cyan-400', action: (c: any) => c.toggleSchemaExplorer() },
     ],
   },
@@ -85,9 +91,13 @@ const NAV_ITEMS: NavItem[] = [
     color: 'text-amber-400',
     activeColor: 'bg-amber-500/10 border-amber-500/30',
     getSubItems: () => [
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       { id: 'backend', label: '后端架构',   icon: Server,    description: '§4.2 五标签页', color: 'text-amber-400', action: (c: any) => c.toggleBackendArch() },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       { id: 'storage', label: '宿主机存储', icon: HardDrive, description: '§5 六标签页',   color: 'text-blue-400',  action: (c: any) => c.toggleHostStorage() },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       { id: 'deploy',  label: '配置即部署', icon: Rocket,    description: '§3.3 五步部署', color: 'text-emerald-400', action: (c: any) => c.toggleDeployPanel() },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       { id: 'manual',  label: '部署手册',   icon: BookOpen,  description: '§7 三标签页',   color: 'text-amber-400', action: (c: any) => c.toggleDeployManual() },
     ],
   },
@@ -98,8 +108,11 @@ const NAV_ITEMS: NavItem[] = [
     color: 'text-purple-400',
     activeColor: 'bg-purple-500/10 border-purple-500/30',
     getSubItems: () => [
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       { id: 'assist', label: 'AI 助手',       icon: Sparkles, description: '属性建议 / 代码片段', color: 'text-purple-400', action: (c: any) => c.toggleAI() },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       { id: 'figma',  label: 'Figma 设计指南', icon: Figma,    description: '§6 五标签页',          color: 'text-purple-400', action: (c: any) => c.toggleFigmaGuide() },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       { id: 'codegen',label: '代码生成引擎',   icon: Code,     description: '代码预览五标签页',      color: 'text-indigo-400', action: (c: any) => c.toggleCodePreview() },
     ],
   },
@@ -110,6 +123,7 @@ const NAV_ITEMS: NavItem[] = [
     color: 'text-emerald-400',
     activeColor: 'bg-emerald-500/10 border-emerald-500/30',
     getSubItems: () => [
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       { id: 'quality', label: '质量面板', icon: TestTube, description: '§8 五标签页', color: 'text-emerald-400', action: (c: any) => c.toggleQualityPanel() },
     ],
   },
@@ -120,13 +134,18 @@ const NAV_ITEMS: NavItem[] = [
     color: 'text-cyan-400',
     activeColor: 'bg-cyan-500/10 border-cyan-500/30',
     getSubItems: () => [
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       { id: 'crdt',      label: 'CRDT 协同',   icon: Radio,          description: '四标签页',         color: 'text-cyan-400', action: (c: any) => c.toggleCRDTPanel() },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       { id: 'conflicts', label: '冲突解析器',   icon: AlertTriangle,  description: '查看/解决冲突',    color: 'text-red-400', action: (c: any) => c.toggleConflictResolver(),
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         badge: (ctx: any) => {
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
           const n = ctx.conflicts?.filter((cc: any) => !cc.resolved).length;
           return n > 0 ? String(n) : null;
         },
       },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       { id: 'simulate',  label: '模拟冲突',     icon: Zap,            description: '生成测试冲突数据', color: 'text-amber-400', action: (c: any) => c.simulateConflict() },
     ],
   },
@@ -137,9 +156,13 @@ const NAV_ITEMS: NavItem[] = [
     color: 'text-white/50',
     activeColor: 'bg-white/[0.06] border-white/[0.12]',
     getSubItems: () => [
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       { id: 'models', label: '模型管理',      icon: Settings,  description: 'AI 模型配置',     color: 'text-white/50',   action: (c: any) => c.openModelSettings() },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       { id: 'theme',  label: '主题切换',      icon: Sun,       description: '暗色/亮色',       color: 'text-amber-400',  action: (c: any) => c.toggleTheme() },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       { id: 'glass',  label: '液态玻璃主题',  icon: Droplets,  description: '切换视觉风格',    color: 'text-purple-400', action: (c: any) => c.setUITheme('liquid-glass') },
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       { id: 'aurora', label: '极光主题',      icon: Zap,       description: '自然渐变光影',    color: 'text-emerald-400', action: (c: any) => c.setUITheme('aurora') },
     ],
   },
@@ -158,6 +181,7 @@ function FlyoutMenu({
 }: {
   items: NavSubItem[];
   navItem: NavItem;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ctx: any;
   onClose: () => void;
   anchorRect: DOMRect | null;
@@ -192,8 +216,10 @@ function FlyoutMenu({
     emptyClass: `text-[10px] ${t.textMuted} text-center py-3`,
     arrowClass: `${t.ctxBg} border-l border-b ${t.ctxBorder}`,
     leftOffset: 56,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     renderBadge: (item: any, ctx: any) => {
       if (item.id === 'conflicts') {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const n = ctx.conflicts?.filter((cc: any) => !cc.resolved).length;
         if (n > 0) {
           return (

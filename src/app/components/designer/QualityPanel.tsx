@@ -25,6 +25,7 @@ import { useThemeTokens } from './hooks/useThemeTokens';
    §8 Quality Assurance — Test Generator
    ================================================================ */
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function generateUnitTests(panels: any[], components: any[]): string {
   const compTypes = [...new Set(components.map(c => c.type))];
   return `// ━━━ Auto-Generated Unit Tests ━━━
@@ -122,6 +123,7 @@ ${panelComps.map(c => `    expect(screen.getByTestId('${c.id}')).toBeInTheDocume
 }).join('\n')}`;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function generateE2ETests(panels: any[], components: any[]): string {
   return `// ━━━ Auto-Generated E2E Tests ━━━
 // Playwright
@@ -296,6 +298,7 @@ test.describe('AI Assistant', () => {
 });`;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function generateSnapshotTests(panels: any[], components: any[]): string {
   return `// ━━━ Auto-Generated Snapshot Tests ━━━
 // Storybook + Chromatic

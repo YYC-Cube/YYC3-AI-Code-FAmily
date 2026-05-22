@@ -212,6 +212,7 @@ describe('安全测试', () => {
       const validRoles = ['admin', 'editor', 'viewer'];
       const testRole = 'editor';
       expect(validRoles.includes(testRole)).toBe(true);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       expect(validRoles.includes('superadmin' as any)).toBe(false);
     });
 

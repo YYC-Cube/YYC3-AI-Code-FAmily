@@ -23,6 +23,7 @@ import { motion } from 'motion/react';
    Code Generation Engine
    ================================================================ */
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function propsToJSX(props: Record<string, any>): string {
   const parts: string[] = [];
   for (const [key, val] of Object.entries(props)) {

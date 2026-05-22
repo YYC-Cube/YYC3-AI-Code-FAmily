@@ -50,6 +50,7 @@ class MockBroadcastChannel {
 }
 
 // Install global mock
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 (globalThis as any).BroadcastChannel = MockBroadcastChannel;
 
 // Mock crypto.randomUUID
@@ -64,6 +65,7 @@ vi.stubGlobal('crypto', {
    ================================================================ */
 
 describe('IPCManager', () => {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   let IPCManager: any;
 
   beforeEach(async () => {
@@ -306,11 +308,14 @@ describe('Cross-Tab IPC Integration', () => {
   });
 
   it('should sync clipboard items across tabs', () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { IPCManager: IPC } = require('../services/multi-instance/IPCManager');
     const ipcA = new IPC('tab-a');
     const ipcB = new IPC('tab-b');
 
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const received: any[] = [];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     ipcB.on('clipboard-share', (msg: any) => received.push(msg.data));
 
     ipcA.broadcast('clipboard-share', {
@@ -329,6 +334,7 @@ describe('Cross-Tab IPC Integration', () => {
   });
 
   it('should handle multiple message types simultaneously', () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { IPCManager: IPC } = require('../services/multi-instance/IPCManager');
     const ipcA = new IPC('sender');
     const ipcB = new IPC('receiver');
@@ -349,6 +355,7 @@ describe('Cross-Tab IPC Integration', () => {
   });
 
   it('should support 3+ tabs communicating', () => {
+    // eslint-disable-next-line @typescript-eslint/no-require-imports
     const { IPCManager: IPC } = require('../services/multi-instance/IPCManager');
     const tabs = ['tab-1', 'tab-2', 'tab-3'].map((id) => new IPC(id));
     const counts = [0, 0, 0];

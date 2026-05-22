@@ -19,6 +19,7 @@ import { pinyin, match as pinyinMatch } from 'pinyin-pro';
 export interface FlyoutItemBase {
   id: string;
   label: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   action: (ctx: any) => void;
 }
 
@@ -181,6 +182,7 @@ export function useFlyoutKeyboard<T extends FlyoutItemBase>({
   searchable = false,
 }: {
   items: T[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ctx: any;
   onClose: () => void;
   searchable?: boolean;
@@ -207,6 +209,7 @@ export function useFlyoutKeyboard<T extends FlyoutItemBase>({
     return items.filter(item => {
       if (matchesPinyin(item.label, q)) return true;
       // Also check 'desc' / 'description' if present on the item
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const desc = (item as any).desc || (item as any).description || '';
       if (desc && matchesPinyin(desc, q)) return true;
       if (item.id.toLowerCase().includes(q.toLowerCase())) return true;
@@ -327,6 +330,7 @@ export function useFlyoutKeyboard<T extends FlyoutItemBase>({
       }
     }, 100);
     return () => clearTimeout(timer);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [searchable]);
 
   const setItemRef = (index: number) => (el: HTMLButtonElement | null) => {
@@ -411,13 +415,16 @@ export function useFlyoutKeyboard<T extends FlyoutItemBase>({
 export function useActivityBarNav<
   TNav extends {
     section: string;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     getSubItems: () => { action: (ctx: any) => void }[];
   }
 >({
   ctx,
   setActiveNavSection,
 }: {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ctx: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setActiveNavSection: (section: any) => void;
 }) {
   const [openFlyout, setOpenFlyout] = useState<string | null>(null);

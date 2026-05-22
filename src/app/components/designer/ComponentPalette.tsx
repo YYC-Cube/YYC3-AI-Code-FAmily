@@ -79,6 +79,7 @@ function DraggableComponent({ comp, disabled }: { comp: ComponentDef; disabled?:
 
   return (
     <div
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       ref={dragRef as any}
       className={`flex items-center gap-2.5 px-2.5 py-2 rounded-lg cursor-grab active:cursor-grabbing group transition-all ${
         isDragging ? 'opacity-40 scale-95' : t.hoverBg

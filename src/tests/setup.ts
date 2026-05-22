@@ -14,6 +14,7 @@
 // localStorage mock (node 环境下不存在)
 if (typeof globalThis.localStorage === 'undefined') {
   const store: Record<string, string> = {};
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (globalThis as any).localStorage = {
     getItem: (key: string) => store[key] ?? null,
     setItem: (key: string, value: string) => { store[key] = String(value); },
@@ -25,7 +26,9 @@ if (typeof globalThis.localStorage === 'undefined') {
 }
 
 // performance.memory mock (仅 Chrome 存在)
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 if (typeof performance !== 'undefined' && !(performance as any).memory) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (performance as any).memory = {
     usedJSHeapSize: 50 * 1024 * 1024,    // 50 MB
     totalJSHeapSize: 100 * 1024 * 1024,   // 100 MB
@@ -35,7 +38,9 @@ if (typeof performance !== 'undefined' && !(performance as any).memory) {
 
 // PerformanceObserver stub
 if (typeof globalThis.PerformanceObserver === 'undefined') {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (globalThis as any).PerformanceObserver = class {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     constructor(_cb: any) {}
     observe() {}
     disconnect() {}
@@ -44,7 +49,9 @@ if (typeof globalThis.PerformanceObserver === 'undefined') {
 
 // ResizeObserver stub
 if (typeof globalThis.ResizeObserver === 'undefined') {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (globalThis as any).ResizeObserver = class {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     constructor(_cb: any) {}
     observe() {}
     unobserve() {}
@@ -54,14 +61,19 @@ if (typeof globalThis.ResizeObserver === 'undefined') {
 
 // requestAnimationFrame / cancelAnimationFrame
 if (typeof globalThis.requestAnimationFrame === 'undefined') {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (globalThis as any).requestAnimationFrame = (cb: FrameRequestCallback) => setTimeout(() => cb(performance.now()), 16);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (globalThis as any).cancelAnimationFrame = (id: number) => clearTimeout(id);
 }
 
 // CustomEvent polyfill
 if (typeof globalThis.CustomEvent === 'undefined') {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (globalThis as any).CustomEvent = class extends Event {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     detail: any;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     constructor(type: string, params?: { detail?: any }) {
       super(type);
       this.detail = params?.detail;
@@ -71,6 +83,7 @@ if (typeof globalThis.CustomEvent === 'undefined') {
 
 // fetch mock (default noop, tests should override)
 if (typeof globalThis.fetch === 'undefined') {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (globalThis as any).fetch = async () => {
     throw new Error('fetch not mocked — use vi.mock or mockFetch()');
   };
@@ -83,6 +96,7 @@ export function resetLocalStorage() {
 }
 
 export function resetPerformanceMemory(opts: { usedMB?: number; limitMB?: number } = {}) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (performance as any).memory = {
     usedJSHeapSize: (opts.usedMB ?? 50) * 1024 * 1024,
     totalJSHeapSize: (opts.usedMB ?? 50) * 2 * 1024 * 1024,
@@ -95,6 +109,7 @@ export function resetPerformanceMemory(opts: { usedMB?: number; limitMB?: number
 export interface MockFetchResponse {
   ok?: boolean;
   status?: number;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   json?: any;
   headers?: Record<string, string>;
 }
@@ -108,6 +123,7 @@ export function createMockFetch(responses: Record<string, MockFetchResponse> = {
     return {
       ok: resp.ok ?? true,
       status: resp.status ?? 200,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       headers: new Map(Object.entries(resp.headers ?? {})) as any,
       json: async () => resp.json ?? {},
       text: async () => JSON.stringify(resp.json ?? {}),
@@ -130,6 +146,7 @@ export class MockWebSocket {
   onclose: ((ev: CloseEvent) => void) | null = null;
   onmessage: ((ev: MessageEvent) => void) | null = null;
   onerror: ((ev: Event) => void) | null = null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   sentMessages: any[] = [];
 
   constructor(url: string) {
@@ -141,16 +158,19 @@ export class MockWebSocket {
     });
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   send(data: any) {
     this.sentMessages.push(data);
   }
 
   close(code?: number, reason?: string) {
     this.readyState = MockWebSocket.CLOSED;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     this.onclose?.({ code: code ?? 1000, reason: reason ?? '', wasClean: true } as any);
   }
 
   // 测试辅助：模拟收到消息
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   simulateMessage(data: any) {
     this.onmessage?.({ data } as MessageEvent);
   }

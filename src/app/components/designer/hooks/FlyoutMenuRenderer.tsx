@@ -76,6 +76,7 @@ export interface FlyoutStyleConfig {
   /** Arrow inline style overrides */
   arrowStyle?: React.CSSProperties;
   /** Badge renderer (optional) */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   renderBadge?: (item: any, ctx: any) => React.ReactNode;
   /** Left offset for the flyout */
   leftOffset: number;
@@ -93,6 +94,7 @@ export interface FlyoutRenderItem extends FlyoutItemBase {
   /** Color class for the icon (or gradient class) */
   color?: string;
   /** Badge function */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   badge?: (ctx: any) => string | null;
 }
 
@@ -118,6 +120,7 @@ export function SharedFlyoutMenu<T extends FlyoutRenderItem>({
 }: {
   items: T[];
   navItem: FlyoutNavRenderItem;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ctx: any;
   onClose: () => void;
   anchorRect: DOMRect | null;

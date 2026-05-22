@@ -46,6 +46,7 @@ describe('StatusBar — 状态栏', () => {
     });
 
     it('TC-SB-004: overall=degraded 时显示 amber 黄色 + 脉冲', () => {
+      // eslint-disable-next-line no-constant-condition
       const color = 'degraded' === 'degraded' ? 'bg-amber-400 animate-pulse' : '';
       expect(color).toContain('animate-pulse');
     });

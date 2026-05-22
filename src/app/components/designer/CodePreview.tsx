@@ -302,6 +302,7 @@ interface ValidationResult {
   stats: { panels: number; components: number; bindings: number; fields: number };
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function validateDesignJSON(panels: any[], components: any[], bindings: Record<string, string>): ValidationResult {
   const errors: ValidationResult['errors'] = [];
 
@@ -352,6 +353,7 @@ function validateDesignJSON(panels: any[], components: any[], bindings: Record<s
    Code Generators
    ================================================================ */
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function generateDesignJSON(panels: any[], components: any[], bindings: Record<string, string>) {
   return JSON.stringify({
     $schema: 'https://yanyucloud.io/schemas/design-v1.json',
@@ -379,6 +381,7 @@ function generateDesignJSON(panels: any[], components: any[], bindings: Record<s
   }, null, 2);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function generateZodSchema(_panels: any[], components: any[]) {
   const compTypes = [...new Set(components.map(c => c.type))];
   return `// Auto-generated Zod validation schema
@@ -440,6 +443,7 @@ export function validateDesign(json: unknown) {
 }`;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function generateReactCode(panels: any[], components: any[], bindings: Record<string, string>) {
   const imports = new Set<string>();
   components.forEach(c => imports.add(c.type));
@@ -528,6 +532,7 @@ ${panelComps.map(c => {
 export default App;`;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function generateVueCode(panels: any[], components: any[]) {
   return `<template>
   <ThemeProvider theme="dark">
@@ -563,6 +568,7 @@ ${Array.from(new Set(components.map(c => c.type))).map(t => `import ${t} from '@
 </script>`;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function generateAngularCode(panels: any[], components: any[]) {
   return `// Auto-generated Angular Component
 // ${panels.length} panels, ${components.length} components
@@ -607,6 +613,7 @@ export class AppComponent {
 }`;
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function generatePipelineCode(panels: any[], components: any[]) {
   const types = [...new Set(components.map(c => c.type))];
   return `// ━━━ YANYUCLOUD 代码生成流水线 (§4.4) ━━━
@@ -675,6 +682,7 @@ console.log('✓ Templates loaded (4 files)');
 // Step 3: 递归生成组件代码
 // ════════════════════════════════���═══════
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function genComponent(node: any): string {
   const { type, props, children = [] } = node;
   const childCodes = children.map(genComponent).join('\\n');

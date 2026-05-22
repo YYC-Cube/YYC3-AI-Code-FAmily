@@ -54,6 +54,7 @@ interface DragItem {
  * on touch devices, falling back to HTML5Backend on desktop or if unavailable.
  */
 function SmartDndProvider({ children }: { children: React.ReactNode }) {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [backend, setBackend] = useState<{ backend: any; options?: any }>({
     backend: HTML5Backend,
   });

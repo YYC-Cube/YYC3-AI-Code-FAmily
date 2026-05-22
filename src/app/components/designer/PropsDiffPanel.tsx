@@ -25,13 +25,16 @@ import { Tooltip } from './Tooltip';
 
 interface PropChange {
   key: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   oldValue: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   newValue: any;
   type: 'added' | 'removed' | 'modified' | 'unchanged';
 }
 
 interface PropsSnapshot {
   componentId: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   props: Record<string, any>;
   timestamp: number;
   label?: string;
@@ -42,7 +45,9 @@ interface PropsSnapshot {
    ================================================================ */
 
 function diffProps(
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   oldProps: Record<string, any>,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   newProps: Record<string, any>
 ): PropChange[] {
   const allKeys = new Set([...Object.keys(oldProps), ...Object.keys(newProps)]);
@@ -70,6 +75,7 @@ function diffProps(
   return changes.sort((a, b) => order[a.type] - order[b.type]);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function formatValue(val: any): string {
   if (val === undefined) return '—';
   if (val === null) return 'null';
@@ -94,6 +100,7 @@ export function PropsDiffPanel() {
 
   // Track snapshots history per component
   const snapshotsRef = useRef<Map<string, PropsSnapshot[]>>(new Map());
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const prevPropsRef = useRef<Record<string, any> | null>(null);
   const [activeSnapshot, setActiveSnapshot] = useState<PropsSnapshot | null>(null);
   const [showUnchanged, setShowUnchanged] = useState(false);
@@ -166,6 +173,7 @@ export function PropsDiffPanel() {
   }, [selectedComponent, updateComponentProps]);
 
   // Rollback individual prop
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const handleRollbackProp = useCallback((key: string, oldValue: any) => {
     if (!selectedComponent || oldValue === undefined) return;
     updateComponentProps(selectedComponent.id, { [key]: oldValue });

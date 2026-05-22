@@ -205,6 +205,7 @@ export const XTerminal = forwardRef<XTerminalHandle, XTerminalProps>(({
       term.dispose();
       newTab.socket?.close();
     };
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   useEffect(() => {

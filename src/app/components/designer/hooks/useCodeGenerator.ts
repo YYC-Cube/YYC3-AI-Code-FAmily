@@ -59,6 +59,7 @@ interface TemplateContext {
    Micro Template Engine (Handlebars-like)
    ================================================================ */
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 type TemplateData = Record<string, any>;
 
 function renderTemplate(template: string, data: TemplateData): string {
@@ -92,6 +93,7 @@ function renderTemplate(template: string, data: TemplateData): string {
   // {{key}} simple replacement
   result = result.replace(/\{\{(\w+(?:\.\w+)*)\}\}/g, (_, path) => {
     const parts = path.split('.');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     let val: any = data;
     for (const p of parts) {
       if (val == null) return '';

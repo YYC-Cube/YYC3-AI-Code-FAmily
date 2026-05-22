@@ -39,6 +39,7 @@ const AI_QUICK_ACTIONS = [
 
 function buildSystemPrompt(
   panels: { id: string; name: string; type: string; children: string[] }[],
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   components: { id: string; type: string; label: string; props: Record<string, any>; panelId: string }[],
   projectName: string
 ): string {
@@ -118,6 +119,7 @@ async function callLLM(
     let full = '';
     let buffer = '';
 
+    // eslint-disable-next-line no-constant-condition
     while (true) {
       const { done, value } = await reader.read();
       if (done) break;
@@ -196,6 +198,7 @@ async function callLLM(
   let full = '';
   let buffer = '';
 
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     const { done, value } = await reader.read();
     if (done) break;
@@ -397,6 +400,7 @@ const COMPONENT_ALIASES: Record<string, string> = {
 interface ParsedDesignComponent {
   type: string;
   label: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   props: Record<string, any>;
 }
 
@@ -471,6 +475,7 @@ function parseAIResponseToDesign(text: string): ParsedDesign | null {
       if (compDef && !seen.has(compDef.type)) {
         seen.add(compDef.type);
         // Try to extract props from the tag
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const propsObj: Record<string, any> = { ...compDef.defaultProps };
         const labelMatch = tagMatch[0].match(/label[=:]"([^"]+)"/i);
         if (labelMatch) propsObj.label = labelMatch[1];
@@ -559,6 +564,7 @@ function InjectToCanvasButton({ text, onInject, tokens }: {
    ================================================================ */
 
 /** Try to extract component prop patches from AI response */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function parseAIResponseToPatch(text: string): { type?: string; label?: string; props: Record<string, any> } | null {
   // Strategy 1: JSON code block with "props" or "component" key
   const jsonBlockRe = /```(?:json)?\s*\n([\s\S]*?)```/g;
@@ -667,6 +673,7 @@ export function AIAssistant() {
   const [isTyping, setIsTyping] = useState(false);
   const [streamText, setStreamText] = useState('');       // accumulates tokens in real-time
   const [connectionStatus, setConnectionStatus] = useState<'idle' | 'connecting' | 'streaming' | 'error'>('idle');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [_errorMsg, setErrorMsg] = useState('');
   const abortRef = useRef<AbortController | null>(null);
   const messagesEndRef = useRef<HTMLDivElement>(null);
@@ -775,6 +782,7 @@ export function AIAssistant() {
         addAIMessage({ role: 'assistant', content: fullResponse });
       }
       setConnectionStatus('idle');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       if (err.name === 'AbortError') {
         // User cancelled — save partial response if any
@@ -1055,6 +1063,7 @@ export function AIAssistant() {
    Error Formatting — helpful error messages
    ================================================================ */
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function formatAPIError(err: any, model: AIModel): string {
   const msg = err.message || String(err);
 

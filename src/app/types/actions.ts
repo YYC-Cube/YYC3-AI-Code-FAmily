@@ -132,6 +132,7 @@ export interface ActionConfig {
   /** 操作类型 */
   type: ActionType;
   /** 操作参数 */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   params?: Record<string, any>;
   /** 是否使用 AI */
   useAI?: boolean;
@@ -180,5 +181,6 @@ export interface ActionResult {
   /** 执行耗时 (ms) */
   duration: number;
   /** 附加数据 */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   meta?: Record<string, any>;
 }

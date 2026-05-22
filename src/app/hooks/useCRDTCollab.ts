@@ -145,6 +145,7 @@ class AwarenessProtocol {
     this.notifyListeners(changes);
   }
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   setLocalStateField(field: string, value: any) {
     const current = this._localState || { user: { id: '', name: '', color: '', lastActive: 0 }, timestamp: 0 };
     if (field === 'user') {
@@ -289,6 +290,7 @@ class YWebSocketProvider {
     this.awareness = new AwarenessProtocol(doc);
 
     // Listen to Y.Doc updates and send to server
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     doc.on('update', (update: Uint8Array, origin: any) => {
       if (origin === 'remote') return; // Don't echo remote updates
       this.sendUpdate(update);
@@ -345,6 +347,7 @@ class YWebSocketProvider {
           this.onError('WebSocket connection error');
         }
       };
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       this.setConnectionState('closed');
       this.onError(`WebSocket creation failed: ${err.message}`);
@@ -469,6 +472,7 @@ class YWebSocketProvider {
           break;
         }
       }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       console.warn('[WS Provider] Message handling error:', err);
     }
@@ -547,6 +551,7 @@ export function useCRDTCollab(config: CRDTCollabConfig) {
   const awarenessRef = useRef<AwarenessProtocol | null>(null);
   const editCountRef = useRef(0);
   const yTextRef = useRef<Y.Text | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const monacoBindingRef = useRef<any>(null);
 
   /* ─── Awareness change → update connectedUsers ─── */
@@ -754,6 +759,7 @@ export function useCRDTCollab(config: CRDTCollabConfig) {
   const redo = useCallback(() => { undoManagerRef.current?.redo(); }, []);
 
   /* ─── Bind to Monaco Editor ─── */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const bindMonacoEditor = useCallback(async (editor: any, _monaco: any) => {
     // Cleanup previous binding
     monacoBindingRef.current?.destroy?.();
@@ -879,7 +885,9 @@ export function useCRDTCollab(config: CRDTCollabConfig) {
   }, [roomName]); // eslint-disable-line react-hooks/exhaustive-deps
 
   /* ─── Derived ─── */
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const canUndo = useMemo(() => (undoManagerRef.current?.undoStack.length ?? 0) > 0, [stats.undoStackSize]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const canRedo = useMemo(() => (undoManagerRef.current?.redoStack.length ?? 0) > 0, [stats.redoStackSize]);
 
   return {

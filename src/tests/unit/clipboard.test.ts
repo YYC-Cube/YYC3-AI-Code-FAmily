@@ -40,7 +40,9 @@ describe('clipboard.ts — 剪贴板工具', () => {
     });
 
     const createElementSpy = vi.spyOn(document, 'createElement');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.spyOn(document.body, 'appendChild').mockImplementation((node) => node as any);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const removeChildSpy = vi.spyOn(document.body, 'removeChild').mockImplementation((node) => node as any);
     const execCommandSpy = vi.spyOn(document, 'execCommand').mockReturnValue(true);
 
@@ -60,7 +62,9 @@ describe('clipboard.ts — 剪贴板工具', () => {
     });
 
     vi.spyOn(document, 'execCommand').mockReturnValue(true);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.spyOn(document.body, 'appendChild').mockImplementation((n) => n as any);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     vi.spyOn(document.body, 'removeChild').mockImplementation((n) => n as any);
 
     copyToClipboard('retry text');

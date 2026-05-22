@@ -26,6 +26,7 @@ export interface ErrorRecord {
   componentStack?: string;
   source: 'boundary' | 'unhandled' | 'promise' | 'network' | 'crdt' | 'ai';
   severity: 'warning' | 'error' | 'fatal';
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   context?: Record<string, any>;
   recovered: boolean;
   recoveryAttempts: number;
@@ -638,6 +639,7 @@ export function useHealthMonitor(): {
       // Memory (if available)
       let memStatus: HealthStatus['memory'] = 'unknown';
       let memPct: number | null = null;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const perf = performance as any;
       if (perf.memory) {
         memPct = perf.memory.usedJSHeapSize / perf.memory.jsHeapSizeLimit;

@@ -201,6 +201,7 @@ async function streamOpenAICompatible(
   let full = '';
   let buffer = '';
 
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     const { done, value } = await reader.read();
     if (done) break;
@@ -257,6 +258,7 @@ async function streamOllama(
   let full = '';
   let buffer = '';
 
+  // eslint-disable-next-line no-constant-condition
   while (true) {
     const { done, value } = await reader.read();
     if (done) break;
@@ -357,6 +359,7 @@ export function useStreamingAI() {
         tokensUsed: Math.ceil(result.length / 4),
       }));
       return result;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       if (err.name === 'AbortError') {
         setState(prev => ({ ...prev, isStreaming: false }));

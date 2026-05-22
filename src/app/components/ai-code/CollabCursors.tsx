@@ -20,8 +20,10 @@ import type { CRDTUser } from '../../hooks/useCRDTCollab';
    ================================================================ */
 interface CollabCursorsProps {
   /** Monaco editor instance */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   editor: any;
   /** Monaco module */
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   monaco: any;
   /** Remote users with cursor/selection data */
   remoteUsers: CRDTUser[];
@@ -39,6 +41,7 @@ interface DecorationState {
   cursorDecoIds: string[];
   selectionDecoIds: string[];
   minimapDecoIds: string[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   widgetDisposables: any[];
 }
 
@@ -162,6 +165,7 @@ export function CollabCursors({
         editor.removeDecorations(decoRef.current.cursorDecoIds);
         editor.removeDecorations(decoRef.current.selectionDecoIds);
         editor.removeDecorations(decoRef.current.minimapDecoIds);
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         decoRef.current.widgetDisposables.forEach((d: any) => d.dispose?.());
         decoRef.current = { cursorDecoIds: [], selectionDecoIds: [], minimapDecoIds: [], widgetDisposables: [] };
       }
@@ -175,12 +179,17 @@ export function CollabCursors({
     const now = Date.now();
 
     // ── Build decorations ──
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const cursorDecos: any[] = [];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const selectionDecos: any[] = [];
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const minimapDecos: any[] = [];
 
     // Clean up old content widgets
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     decoRef.current.widgetDisposables.forEach((d: any) => d.dispose?.());
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const newWidgetDisposables: any[] = [];
 
     filteredUsers.forEach((user) => {
@@ -314,6 +323,7 @@ export function CollabCursors({
         editor.removeDecorations(decoRef.current.selectionDecoIds);
         editor.removeDecorations(decoRef.current.minimapDecoIds);
       }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       decoRef.current.widgetDisposables.forEach((d: any) => d.dispose?.());
     };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps

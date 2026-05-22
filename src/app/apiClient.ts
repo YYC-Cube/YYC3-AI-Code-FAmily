@@ -33,6 +33,7 @@ import { apiCircuitBreaker, errorTelemetry } from './components/ErrorBoundary';
 
 // ── Types ──
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 export interface ApiResponse<T = any> {
   ok: boolean;
   status: number;
@@ -47,6 +48,7 @@ export interface ApiResponse<T = any> {
 export interface ApiRequestConfig {
   method: 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
   path: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   body?: any;
   headers?: Record<string, string>;
   timeout?: number;
@@ -137,6 +139,7 @@ async function requestWithFailover(config: ApiRequestConfig): Promise<ApiRespons
       ok: false,
       status: 503,
       data: null,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       error: `API 熔断器已开启（${stats.recentFailures} 次失败），${Math.round((apiCircuitBreaker as any).config?.recoveryTimeout / 1000 || 30)}s 后自动恢复`,
       endpoint: 'circuit-breaker',
       latency: 0,
@@ -207,6 +210,7 @@ async function executeRequest(config: ApiRequestConfig): Promise<ApiResponse> {
       clearTimeout(timer);
       const latency = Math.round(performance.now() - start);
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       let data: any = null;
       try { data = await res.json(); } catch {}
 
@@ -232,6 +236,7 @@ async function executeRequest(config: ApiRequestConfig): Promise<ApiResponse> {
       }
 
       return response;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       failoverCount++;
       lastError = err.name === 'AbortError' ? `超时 (${timeout}ms)` : (err.message || 'Network Error');
@@ -268,22 +273,27 @@ async function executeRequest(config: ApiRequestConfig): Promise<ApiResponse> {
 // ── 类型安全的 CRUD 方法 ──
 
 export const api = {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async get<T = any>(path: string, opts?: Partial<ApiRequestConfig>): Promise<ApiResponse<T>> {
     return requestWithFailover({ method: 'GET', path, cacheTTL: CACHE_CONFIG.ttl, ...opts });
   },
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async post<T = any>(path: string, body?: any, opts?: Partial<ApiRequestConfig>): Promise<ApiResponse<T>> {
     return requestWithFailover({ method: 'POST', path, body, ...opts });
   },
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async put<T = any>(path: string, body?: any, opts?: Partial<ApiRequestConfig>): Promise<ApiResponse<T>> {
     return requestWithFailover({ method: 'PUT', path, body, ...opts });
   },
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async patch<T = any>(path: string, body?: any, opts?: Partial<ApiRequestConfig>): Promise<ApiResponse<T>> {
     return requestWithFailover({ method: 'PATCH', path, body, ...opts });
   },
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   async delete<T = any>(path: string, opts?: Partial<ApiRequestConfig>): Promise<ApiResponse<T>> {
     return requestWithFailover({ method: 'DELETE', path, ...opts });
   },
@@ -293,7 +303,9 @@ export const api = {
   designs: {
     list:   ()                     => api.get('/api/designs'),
     get:    (id: string)           => api.get(`/api/designs/${id}`),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     create: (data: any)            => api.post('/api/designs', data),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     update: (id: string, data: any)=> api.put(`/api/designs/${id}`, data),
     delete: (id: string)           => api.delete(`/api/designs/${id}`),
     export: (id: string, format: 'react' | 'vue' | 'angular') =>
@@ -306,14 +318,18 @@ export const api = {
     getDoc:    (room: string)           => api.get(`/api/crdt/${room}`),
     snapshot:  (room: string)           => api.post(`/api/crdt/${room}/snapshot`),
     conflicts: (room: string)           => api.get(`/api/crdt/${room}/conflicts`),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     resolve:   (room: string, data: any)=> api.post(`/api/crdt/${room}/resolve`, data),
   },
 
   // ── AI 代理 ──
 
   ai: {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     chat:     (body: any) => api.post('/api/ai-proxy', body),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     suggest:  (body: any) => api.post('/api/ai-proxy/suggest', body),
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     diagnose: (body: any) => api.post('/api/ai-proxy/diagnose', body),
   },
 

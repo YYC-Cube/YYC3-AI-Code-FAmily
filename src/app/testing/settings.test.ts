@@ -11,17 +11,17 @@
  * tags: test,vitest,settings,sync,keybinding,rules,search
  */
 
-import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
-import { searchSettings, type Settings, type RuleConfig, type SkillConfig, type MCPConfig, type ModelConfig } from '../components/settings/useSettingsStore';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { searchSettings, type MCPConfig, type ModelConfig, type RuleConfig, type Settings, type SkillConfig } from '../components/settings/useSettingsStore';
 import {
-  SettingsSyncService,
+  matchesKeybinding,
+  parseKeybinding,
+} from '../hooks/useGlobalKeybindings';
+import {
   SETTINGS_EVENTS,
+  SettingsSyncService,
   VSCODE_KEYBINDINGS,
 } from '../services/settingsSyncService';
-import {
-  parseKeybinding,
-  matchesKeybinding,
-} from '../hooks/useGlobalKeybindings';
 
 /* ================================================================
    Mock localStorage
@@ -510,6 +510,7 @@ describe('syncEditorSettings', () => {
 
     // 验证 localStorage 中 editorFontSize 更新为 16
     const calls = localStorageMock.setItem.mock.calls;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const appSettingsCall = calls.find((c: any[]) => c[0] === 'yyc3-app-settings');
     expect(appSettingsCall).toBeDefined();
     const saved = JSON.parse(appSettingsCall![1]);

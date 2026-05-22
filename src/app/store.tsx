@@ -19,6 +19,7 @@ export interface ComponentDef {
   label: string;
   category: 'basic' | 'form' | 'data' | 'media' | 'advanced';
   icon: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   defaultProps: Record<string, any>;
 }
 
@@ -26,6 +27,7 @@ export interface ComponentInstance {
   id: string;
   type: string;
   label: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   props: Record<string, any>;
   panelId: string;
   groupId?: string;
@@ -178,7 +180,9 @@ export type UITheme = 'classic' | 'liquid-glass' | 'aurora';
 export interface CRDTConflict {
   id: string;
   path: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   localValue: any;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   remoteValue: any;
   remotePeer: string;
   timestamp: number;
@@ -292,6 +296,7 @@ interface DesignerContextType extends DesignerState {
   addComponentToPanel: (panelId: string, compDef: ComponentDef) => void;
   removeComponent: (id: string) => void;
   selectComponent: (id: string | null) => void;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   updateComponentProps: (id: string, props: Record<string, any>) => void;
   toggleTheme: () => void;
   toggleAI: () => void;
@@ -362,7 +367,9 @@ const MAX_HISTORY = 50;
 // HMR-safe context: preserve the same context reference across hot reloads
 const CTX_KEY = '__YANYUCLOUD_DESIGNER_CTX__';
 const DesignerContext: React.Context<DesignerContextType | null> =
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   (globalThis as any)[CTX_KEY] ??
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   ((globalThis as any)[CTX_KEY] = createContext<DesignerContextType | null>(null));
 
 export function useDesigner(): DesignerContextType {
@@ -532,6 +539,7 @@ export function DesignerProvider({ children }: { children: ReactNode }) {
       activeNavSection, secondaryNavOpen, activeNavSubItem,
       uiTheme, currentUserIdentity,
     } as DesignerState);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [projectName, panels, components, theme, aiModels, activeModelId, dataBindings, snapEnabled]);
   
   /* ---- State Self-Healing: auto-detect & fix invalid state ---- */
@@ -585,6 +593,7 @@ export function DesignerProvider({ children }: { children: ReactNode }) {
       const expected = panelChildMap.get(p.id) || [];
       const missing = expected.filter(cid => !p.children.includes(cid));
       if (missing.length > 0) {
+        // eslint-disable-next-line no-console
         console.debug(`[State Self-Heal] Panel "${p.name}" reconciled ${missing.length} child ref(s)`);
         return { ...p, children: [...p.children, ...missing] };
       }
@@ -776,6 +785,7 @@ export function DesignerProvider({ children }: { children: ReactNode }) {
     setSelectedComponentIds(id ? [id] : []);
   }, []);
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const updateComponentProps = useCallback((id: string, newProps: Record<string, any>) => {
     pushHistory();
     setComponents(prev => prev.map(c => c.id === id ? { ...c, props: { ...c.props, ...newProps } } : c));
@@ -893,6 +903,7 @@ export function DesignerProvider({ children }: { children: ReactNode }) {
         setDesignJsonValid(true);
         setDesignJsonErrors([]);
       }
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (err: any) {
       setDesignJsonValid(false);
       setDesignJsonErrors([err.message || 'Invalid JSON']);

@@ -77,6 +77,7 @@ export interface SimulatedPeerConfig {
 export interface TestAssertion {
   type: 'doc-sync' | 'awareness-count' | 'client-count' | 'content-equals';
   roomName: string;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   expected: any;
 }
 
@@ -179,6 +180,7 @@ export class MockWSServer {
     };
 
     // Assign the receive function (actual client will set this)
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     socket.receive = sendToClient as any; // Will be overridden by user
 
     return { socket, send, close };
@@ -532,6 +534,7 @@ export class MockWSServer {
     const entry = { timestamp: Date.now(), type, room, client, detail };
     this.eventLog.push(entry);
     if (this.config.verbose) {
+      // eslint-disable-next-line no-console
       console.log(`[MockWS] [${type}] [${room}] [${client}] ${detail || ''}`);
     }
   }

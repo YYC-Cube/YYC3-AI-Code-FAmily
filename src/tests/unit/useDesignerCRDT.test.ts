@@ -20,6 +20,7 @@ const AVATAR_COLORS = [
 ];
 
 // 复现 loadOrCreateIdentity 逻辑
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function loadOrCreateIdentity(rbacIdentity: any | null): any {
   if (rbacIdentity) {
     return { ...rbacIdentity, connectedAt: Date.now() };

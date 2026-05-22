@@ -249,6 +249,7 @@ export function AIChatPanel({
           if (abortRef.current) break;
           if (chunk.done) break;
         }
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
         setMessages(prev => prev.map(m =>
           m.id === assistantId

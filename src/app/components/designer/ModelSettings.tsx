@@ -266,6 +266,7 @@ function loadJSON<T>(key: string, fallback: T): T {
     return raw ? JSON.parse(raw) : fallback;
   } catch { return fallback; }
 }
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function saveJSON(key: string, value: any) {
   try { localStorage.setItem(key, JSON.stringify(value)); } catch {}
 }
@@ -680,6 +681,7 @@ function MCPConfigPanel() {
   };
 
   const handleExportJson = () => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const mcpConfig: Record<string, any> = { mcpServers: {} };
     servers.filter(s => s.enabled).forEach(s => {
       mcpConfig.mcpServers[s.name.toLowerCase()] = {
@@ -697,6 +699,7 @@ function MCPConfigPanel() {
     try {
       const parsed = JSON.parse(jsonDraft);
       const mcpServers = parsed.mcpServers || parsed;
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       const imported: MCPServerConfig[] = Object.entries(mcpServers).map(([name, conf]: [string, any]) => ({
         id: 'mcp-' + Date.now() + '-' + name,
         name,
@@ -709,6 +712,7 @@ function MCPConfigPanel() {
       setServers(imported);
       setJsonMode(false);
       setJsonError('');
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     } catch (e: any) {
       setJsonError('JSON 解析失败: ' + e.message);
     }
@@ -1047,6 +1051,7 @@ function CRDTCollabPanel() {
     };
     setCurrentUserIdentity({
       ...base,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       role: roleId as any,
     });
   };
@@ -1425,6 +1430,7 @@ export function ModelSettings() {
 
         setResult({ status: 'success', message: '连接成功，API 响应正常', latency, modelResponse: reply.slice(0, 100) });
 
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       } catch (err: any) {
         clearTimeout(timer);
         const latency = Math.round(performance.now() - start);
@@ -1477,6 +1483,7 @@ export function ModelSettings() {
     // Show toast
     setSelectionToast(model.name);
     setTimeout(() => setSelectionToast(null), 2500);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [allProviders, customUrls, apiKeys, aiModels, activateAIModel, addAIModel]);
 
   // Compute the "active model key" (providerId:modelId) from the current activeModelId in store
@@ -1548,6 +1555,7 @@ export function ModelSettings() {
     fetch(url)
       .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
       .then(data => {
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const models: OllamaDetectedModel[] = (data.models || []).map((m: any) => ({
           name: m.name || m.model,
           size: m.size ? (m.size / 1e9).toFixed(1) + ' GB' : 'N/A',

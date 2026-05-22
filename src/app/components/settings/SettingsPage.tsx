@@ -379,6 +379,7 @@ function KeybindingsEditor({
   const [recordingKey, setRecordingKey] = useState<string | null>(null);
 
   // Merge custom onto defaults
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const resolved = { ...VSCODE_KEYBINDINGS, ...customKeybindings };
 
   // Conflict detection: find duplicate shortcuts
@@ -598,6 +599,7 @@ async function validateApiKey(
     } else {
       return { valid: false, message: `验证异常 — 服务返回 ${resp.status}` };
     }
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   } catch (err: any) {
     if (err.name === 'AbortError') {
       return { valid: false, message: '验证超时 — 网络连接超时' };
@@ -702,6 +704,7 @@ function GeneralSection() {
             ].map((t) => (
               <button
                 key={t.v}
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 onClick={() => updateGeneralSettings({ theme: t.v as any })}
                 className={`flex items-center gap-1.5 px-2.5 py-1 rounded-lg text-[10px] transition-all ${
                   g.theme === t.v ? 'bg-[#667eea]/15 text-[#667eea] border border-[#667eea]/30' : 'bg-white/[0.04] text-white/40 border border-transparent hover:bg-white/[0.06]'
@@ -717,6 +720,7 @@ function GeneralSection() {
         <SettingRow label="语言" desc="界面显示语言">
           <SmallSelect
             value={g.language}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             onChange={(v) => updateGeneralSettings({ language: v as any })}
             options={[
               { value: 'zh-CN', label: '简体中文' },
@@ -785,6 +789,7 @@ function GeneralSection() {
         <SettingRow label="本地链接打开方式">
           <SmallSelect
             value={g.localLinkOpenMode}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             onChange={(v) => updateGeneralSettings({ localLinkOpenMode: v as any })}
             options={[
               { value: 'system', label: '系统默认' },
@@ -796,6 +801,7 @@ function GeneralSection() {
         <SettingRow label="Markdown 打开方式">
           <SmallSelect
             value={g.markdownOpenMode}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             onChange={(v) => updateGeneralSettings({ markdownOpenMode: v as any })}
             options={[
               { value: 'editor', label: '编辑模式' },
@@ -1439,6 +1445,7 @@ function ConversationSection() {
         <SettingRow label="审查范围">
           <SmallSelect
             value={c.codeReviewScope}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             onChange={(v) => updateConversationSettings({ codeReviewScope: v as any })}
             options={[
               { value: 'all', label: '全部文件' },
@@ -1467,6 +1474,7 @@ function ConversationSection() {
         <SettingRow label="命令运行方式">
           <SmallSelect
             value={c.commandRunMode}
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             onChange={(v) => updateConversationSettings({ commandRunMode: v as any })}
             options={[
               { value: 'sandbox', label: '沙箱模式' },

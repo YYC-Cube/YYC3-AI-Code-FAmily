@@ -102,6 +102,7 @@ describe('ErrorTelemetry', () => {
     const raw = localStorage.getItem('yyc3-error-telemetry');
     expect(raw).toBeTruthy();
     const parsed = JSON.parse(raw!);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     expect(parsed.some((e: any) => e.message === 'persist-test')).toBe(true);
   });
 

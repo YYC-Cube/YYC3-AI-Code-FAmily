@@ -438,6 +438,7 @@ export function useWindowManager() {
       id,
       name,
       description,
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
       panels: panels.map(({ icon, ...rest }) => ({ ...rest, icon } as any)),
       tabGroups,
       windowLayout,

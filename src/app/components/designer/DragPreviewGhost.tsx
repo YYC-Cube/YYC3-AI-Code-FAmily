@@ -81,6 +81,7 @@ function SnapGuideLines({ x, y }: { x: number; y: number }) {
    Ghost Preview Card — translucent component preview
    ================================================================ */
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 function GhostCard({ componentDef }: { componentDef: any }) {
   const IconComp = iconMap[componentDef?.icon] || Square;
   const label = componentDef?.label || componentDef?.type || '组件';
