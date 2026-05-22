@@ -10,13 +10,16 @@
  * priority: P1
  */
 
-import { describe, it, expect, beforeEach, vi } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { copyToClipboard } from '../../app/utils/clipboard';
 
 describe('clipboard.ts — 剪贴板工具', () => {
 
   beforeEach(() => {
     vi.restoreAllMocks();
+    if (typeof document.execCommand !== 'function') {
+      document.execCommand = () => false;
+    }
   });
 
   it('TC-CB-001: 优先使用 navigator.clipboard.writeText', async () => {

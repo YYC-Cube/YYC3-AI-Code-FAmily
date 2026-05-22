@@ -2,6 +2,8 @@
 
 <div align="center">
 
+<img src="public/Family-001.png" alt="YYC³ AI Code Family" width="100%" />
+
 > **「YanYuCloudCube」**
 > **言启象限 | 语枢未来**
 > **Words Initiate Quadrants, Language Serves as Core for Future**
@@ -16,6 +18,9 @@
 [![TypeScript](https://img.shields.io/badge/TypeScript-5.x-blue)](https://www.typescriptlang.org/)
 [![React](https://img.shields.io/badge/React-18.x-61DAFB)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-6.x-646CFF)](https://vitejs.dev/)
+[![Deploy](https://github.com/YYC-Cube/YYC3-AI-Code-FAmily/actions/workflows/deploy.yml/badge.svg)](https://github.com/YYC-Cube/YYC3-AI-Code-FAmily/actions/workflows/deploy.yml)
+
+**🌐 在线访问**: [https://ai-family.yyc3.top](https://ai-family.yyc3.top)
 
 </div>
 
@@ -50,17 +55,17 @@ git clone https://github.com/YYC-Cube/YYC3-AI-Code.git
 cd YYC3-AI-Code
 ```
 
-2. **安装依赖**
+1. **安装依赖**
 
 ```bash
 # 使用 pnpm (推荐)
-c
+pnpm install
 
 # 或使用 npm
 npm install
 ```
 
-3. **配置环境变量**
+1. **配置环境变量**
 
 ```bash
 # 复制环境变量示例文件
@@ -70,7 +75,7 @@ cp .env.example .env
 # 至少需要配置 AI API Key
 ```
 
-4. **启动开发服务器**
+1. **启动开发服务器**
 
 ```bash
 # 使用 pnpm
@@ -80,7 +85,7 @@ pnpm dev
 npm run dev
 ```
 
-5. **访问应用**
+1. **访问应用**
 
 打开浏览器访问 [http://localhost:5173](http://localhost:5173)
 
@@ -186,7 +191,7 @@ YYC3-AI-Code/
 | TypeScript | 5.x | 类型系统 |
 | Vite | 6.3.5 | 构建工具 |
 | Tailwind CSS | 4.1.12 | 样式框架 |
-| Zustand | - | 状态管理 |
+| Context + useReducer | - | 状态管理 |
 | React Router | 7.13.0 | 路由管理 |
 | Yjs | 13.6.29 | 实时协同 |
 | Monaco Editor | - | 代码编辑器 |
@@ -237,21 +242,49 @@ YYC3-AI-Code/
 
 ```bash
 # 开发
-pnpm dev              # 启动开发服务器
-pnpm build            # 构建生产版本
+pnpm dev              # 启动开发服务器 (port 5173)
+pnpm build            # TypeScript 检查 + Vite 生产构建
 pnpm preview          # 预览生产构建
 
 # 测试
-pnpm test             # 运行测试
+pnpm test             # 运行 Vitest 单元测试
 pnpm test:ui          # 运行测试 UI
-pnpm coverage         # 生成覆盖率报告
+pnpm test:coverage    # 生成覆盖率报告
 
 # 代码质量
-pnpm lint             # 运行 ESLint
-pnpm lint:fix         # 自动修复 ESLint 问题
-pnpm typecheck        # TypeScript 类型检查
-pnpm format           # 格式化代码
+pnpm lint             # ESLint 检查 (--max-warnings 0)
+pnpm lint:fix         # ESLint 自动修复
+pnpm typecheck        # TypeScript 类型检查 (tsc --noEmit)
+pnpm format           # Prettier 格式化
 ```
+
+## 🌐 部署
+
+### 自动部署 (CI/CD)
+
+项目配置了 GitHub Actions 自动部署到 GitHub Pages：
+
+- **触发条件**: 推送到 `main` 分支
+- **流水线**: TypeCheck → Lint → Build → 404.html → Deploy
+- **自定义域名**: `ai-family.yyc3.top`
+- **在线访问**: [https://ai-family.yyc3.top](https://ai-family.yyc3.top)
+
+### 路由架构
+
+```
+/            → AIHomePage      (AI 首页 + 智能意图路由)
+/designer    → DesignerLayout  (可视化设计器 + 代码生成)
+/ai-code     → AICodeSystem    (AI 编程工作台 + Monaco Editor)
+/settings    → SettingsPage    (全局配置 + AI 模型管理)
+```
+
+### 主题系统
+
+支持三种 UI 主题：
+
+- **Classic** — 经典深色主题
+- **Liquid Glass** — 毛玻璃质感
+- **Aurora** — 极光渐变
 
 ### 提交规范
 
@@ -303,8 +336,8 @@ chore: 构建/工具相关
 
 **YanYuCloudCube Team**
 
-- **联系邮箱**: admin@0379.email
-- **项目地址**: https://github.com/YYC-Cube/YYC3-AI-Code
+- **联系邮箱**: <admin@0379.email>
+- **项目地址**: <https://github.com/YYC-Cube/YYC3-AI-Code>
 
 ## 🙏 致谢
 
@@ -312,8 +345,8 @@ chore: 构建/工具相关
 
 ## 📞 联系我们
 
-- **邮箱**: admin@0379.email
-- **GitHub Issues**: https://github.com/YYC-Cube/YYC3-AI-Code/issues
+- **邮箱**: <admin@0379.email>
+- **GitHub Issues**: <https://github.com/YYC-Cube/YYC3-AI-Code/issues>
 - **Discord**: [加入我们的 Discord 社区](https://discord.gg/yyc3)
 
 ---

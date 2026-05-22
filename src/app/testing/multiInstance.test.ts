@@ -11,7 +11,8 @@
  * tags: test,multi-instance,ipc,vitest
  */
 
-import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
+import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
+import { IPCManager } from '../services/multi-instance/IPCManager';
 
 /* ================================================================
    Mock BroadcastChannel for test environment
@@ -308,10 +309,8 @@ describe('Cross-Tab IPC Integration', () => {
   });
 
   it('should sync clipboard items across tabs', () => {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { IPCManager: IPC } = require('../services/multi-instance/IPCManager');
-    const ipcA = new IPC('tab-a');
-    const ipcB = new IPC('tab-b');
+    const ipcA = new IPCManager('tab-a');
+    const ipcB = new IPCManager('tab-b');
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     const received: any[] = [];
@@ -334,10 +333,8 @@ describe('Cross-Tab IPC Integration', () => {
   });
 
   it('should handle multiple message types simultaneously', () => {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { IPCManager: IPC } = require('../services/multi-instance/IPCManager');
-    const ipcA = new IPC('sender');
-    const ipcB = new IPC('receiver');
+    const ipcA = new IPCManager('sender');
+    const ipcB = new IPCManager('receiver');
 
     const log: string[] = [];
     ipcB.on('instance-created', () => log.push('created'));
@@ -355,9 +352,7 @@ describe('Cross-Tab IPC Integration', () => {
   });
 
   it('should support 3+ tabs communicating', () => {
-    // eslint-disable-next-line @typescript-eslint/no-require-imports
-    const { IPCManager: IPC } = require('../services/multi-instance/IPCManager');
-    const tabs = ['tab-1', 'tab-2', 'tab-3'].map((id) => new IPC(id));
+    const tabs = ['tab-1', 'tab-2', 'tab-3'].map((id) => new IPCManager(id));
     const counts = [0, 0, 0];
 
     tabs.forEach((tab, i) => {

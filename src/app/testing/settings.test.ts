@@ -511,7 +511,7 @@ describe('syncEditorSettings', () => {
     // 验证 localStorage 中 editorFontSize 更新为 16
     const calls = localStorageMock.setItem.mock.calls;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    const appSettingsCall = calls.find((c: any[]) => c[0] === 'yyc3-app-settings');
+    const appSettingsCall = [...calls].reverse().find((c: any[]) => c[0] === 'yyc3-app-settings');
     expect(appSettingsCall).toBeDefined();
     const saved = JSON.parse(appSettingsCall![1]);
     expect(saved.editorFontSize).toBe(16);

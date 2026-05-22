@@ -14,9 +14,15 @@
  * where the Clipboard API is blocked by permissions policy.
  */
 export function copyToClipboard(text: string): void {
-  // Try modern Clipboard API first
   if (navigator.clipboard?.writeText) {
-    navigator.clipboard.writeText(text).catch(() => fallbackCopy(text));
+    try {
+      const result = navigator.clipboard.writeText(text);
+      if (result && typeof result.catch === 'function') {
+        result.catch(() => fallbackCopy(text));
+      }
+    } catch {
+      fallbackCopy(text);
+    }
     return;
   }
   fallbackCopy(text);

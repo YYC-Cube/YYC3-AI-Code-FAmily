@@ -13,6 +13,27 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 性能监控面板
 - 插件市场集成
 
+## [1.1.0] - 2026-05-22
+
+### Added
+- 🚀 CI/CD 自动部署流水线 (GitHub Actions → GitHub Pages)
+- 🌐 自定义域名支持 `ai-family.yyc3.top`
+- 📄 SPA 路由回退 (404.html 自动生成)
+- 📋 开发者文档五件套补全 (README / CHANGELOG / CONTRIBUTING / CODE_OF_CONDUCT / LICENSE)
+
+### Fixed
+- 🔧 ESLint 全面修复 (317 warnings → 0)
+- 🎨 全局 Logo 路径修正 (yyc3-icons → public root)
+- 🌐 index.html Favicon / Apple Touch Icon / PWA Manifest 完善
+- 📐 ESLint ignorePatterns 排除 `project/` 和 `src/imports/` 非源码目录
+- 🔐 Git remote 从 HTTPS 切换到 SSH 以支持 workflow 文件推送
+
+### Changed
+- 📖 README.md 新增 CI/CD 徽章、在线访问地址、路由架构说明、部署文档
+- 📖 README.md 修正状态管理描述 (Zustand → Context + useReducer)
+- 📖 README.md 修正安装命令截断问题
+- 🎨 theme-color 从 #000000 更新为 #667eea (品牌色)
+
 ## [1.0.0] - 2026-03-19
 
 ### Added

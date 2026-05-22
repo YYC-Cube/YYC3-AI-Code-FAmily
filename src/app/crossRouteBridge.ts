@@ -89,7 +89,10 @@ export function bridgeReadForDesigner(): BridgePayload | null {
     const raw = localStorage.getItem(KEY_CODE_TO_DESIGNER);
     if (!raw) return null;
     const payload = JSON.parse(raw) as BridgePayload;
-    // Only use if less than 5 minutes old
+    if (!payload || typeof payload !== 'object' || typeof payload.timestamp !== 'number') {
+      localStorage.removeItem(KEY_CODE_TO_DESIGNER);
+      return null;
+    }
     if (Date.now() - payload.timestamp > 300_000) {
       localStorage.removeItem(KEY_CODE_TO_DESIGNER);
       return null;
@@ -103,6 +106,10 @@ export function bridgeReadForCode(): BridgePayload | null {
     const raw = localStorage.getItem(KEY_DESIGNER_TO_CODE);
     if (!raw) return null;
     const payload = JSON.parse(raw) as BridgePayload;
+    if (!payload || typeof payload !== 'object' || typeof payload.timestamp !== 'number') {
+      localStorage.removeItem(KEY_DESIGNER_TO_CODE);
+      return null;
+    }
     if (Date.now() - payload.timestamp > 300_000) {
       localStorage.removeItem(KEY_DESIGNER_TO_CODE);
       return null;
