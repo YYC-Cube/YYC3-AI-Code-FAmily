@@ -1,0 +1,63 @@
+# 🤝 Dependabot 配置
+# 自动监控依赖更新，确保安全与最新版本
+
+version: 2
+updates:
+  # npm 依赖
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      time: "09:00"
+      timezone: "Asia/Shanghai"
+    open-pull-requests-limit: 10
+    target-branch: "main"
+    labels:
+      - "dependencies"
+      - "automated"
+    commit-message:
+      prefix: "chore(deps)"
+      prefix-development: "chore(deps-dev)"
+    groups:
+      # 开发依赖分组
+      development-dependencies:
+        dependency-type: "development"
+        update-types:
+          - "minor"
+          - "patch"
+      # 生产依赖分组
+      production-dependencies:
+        dependency-type: "production"
+        update-types:
+          - "minor"
+          - "patch"
+      # 安全更新分组
+      security-updates:
+        dependency-type: "all"
+        update-types:
+          - "major"
+    ignore:
+      # TypeScript 5.x 不升级到 6.x（避免破坏性变更）
+      - dependency-name: "typescript"
+        update-types: ["version-update:semver-major"]
+      # React 18 不升级到 19（保持稳定性）
+      - dependency-name: "react"
+        update-types: ["version-update:semver-major"]
+      - dependency-name: "react-dom"
+        update-types: ["version-update:semver-major"]
+      # Vite 锁定 6.x（pnpm overrides）
+      - dependency-name: "vite"
+        update-types: ["version-update:semver-major"]
+
+  # GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+    labels:
+      - "github-actions"
+      - "automated"
+    commit-message:
+      prefix: "ci(actions)"

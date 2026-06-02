@@ -13,6 +13,39 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - 性能监控面板
 - 插件市场集成
 
+## [1.2.0] - 2026-05-22
+
+### Added — 🎯 开源级文档体系完整升级
+- 📖 **README.md 全面重构** — 开源顶级专业项目首页（19 个徽章 / 16 章节导航 / FAQ / 路线图）
+- 🔒 **SECURITY.md** — 完整安全策略（漏洞报告 / 响应时间 / PGP 加密 / CVSS 分级）
+- 📝 **Issue 模板系统** — Bug Report / Feature Request / Documentation 三套结构化模板
+- 📦 **PR 模板** — Pull Request 标准化提交模板（变更类型 / 影响路由 / 检查清单）
+- 💰 **FUNDING.yml** — GitHub Sponsors 赞助按钮配置
+- 🤖 **Dependabot 配置** — 自动依赖更新（npm + GitHub Actions，按依赖类型分组）
+- 📞 **社区联系渠道** — Discord / Twitter / Issues / Discussions / Email 多渠道
+
+### Added — 🧬 双系统架构文档化
+- 🎨 **双系统架构图** — Designer + AI Code 完整可视化拓扑
+- 🛣️ **路由架构表** — 4 大路由（Home / Designer / AI Code / Settings）详细说明
+- 🤖 **智能意图路由** — 32 类 INTENT_RULES 自然语言分流机制文档化
+- 🌉 **Cross-Route Bridge** — 跨路由双向通信机制文档化
+
+### Added — 📊 测试与质量徽章
+- 🏷️ **测试徽章** — 466/466 passed 显式徽章
+- 🏷️ **ESLint 徽章** — 0 warnings 显式徽章
+- 🏷️ **覆盖率徽章** — Statements 85% 显式徽章
+
+### Changed — 📖 README 结构优化
+- ♻️ **章节重组** — 16 章节标准化（目录导航 / 项目亮点 / 双系统架构 / 核心特性 / 快速开始 / 技术栈 / 项目结构 / 使用指南 / 开发指南 / 测试 / 部署 / 文档导航 / 贡献指南 / 安全策略 / 路线图 / FAQ）
+- 🎨 **视觉升级** — Family-001.png 顶图 + 多色徽章系统 + ASCII 架构图
+- 📚 **文档导航** — 完整根目录文档 + docs/ 目录导航 + 设计资源链接
+- 🗺️ **路线图** — v1.x（已发布）/ v2.x（规划中）/ v3.x（远期）三阶段规划
+- ❓ **FAQ** — 6 个高频问题折叠面板
+
+### Fixed — 🔧 配置完善
+- 🔧 **ESLint ignorePatterns** 排除 `*.html`（修复 `Parsing error: '>' expected`）
+- 🔒 **Bridge 安全加固** — 添加 payload 类型校验（`typeof === 'object'` + `typeof timestamp === 'number'`）
+
 ## [1.1.0] - 2026-05-22
 
 ### Added

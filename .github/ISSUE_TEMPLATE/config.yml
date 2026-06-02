@@ -1,0 +1,17 @@
+blank_issues_enabled: false
+contact_links:
+  - name: 💬 GitHub Discussions
+    url: https://github.com/YYC-Cube/YYC3-AI-Code-FAmily/discussions
+    about: 用于提问、想法和讨论（非 Bug 或功能请求）
+  - name: 🌐 在线体验
+    url: https://ai-family.yyc3.top
+    about: 直接体验最新版本，复现问题
+  - name: 📧 商务合作
+    url: mailto:admin@0379.email
+    about: 商务合作、媒体咨询、私有部署
+  - name: 🔒 安全漏洞
+    url: https://github.com/YYC-Cube/YYC3-AI-Code-FAmily/security/advisories/new
+    about: 安全漏洞请通过 Security Advisory 私密报告
+  - name: 💬 Discord 社区
+    url: https://discord.gg/yyc3
+    about: 加入 Discord 实时交流

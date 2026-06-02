@@ -1,0 +1,16 @@
+# 💰 赞助配置
+# Docs: https://docs.github.com/en/repositories/managing-your-repositories-settings-and-features/customizing-your-repository/displaying-a-sponsor-button-in-your-repository
+
+github: [YYC-Cube]
+patreon: # Replace with your Patreon username
+open_collective: # Replace with your Open Collective username
+ko_fi: # Replace with your Ko-fi username
+tidelift: # Replace with your Tidelift platform-name/package-name
+community_bridge: # Replace with your Community Bridge project-name e.g., cloud-foundry
+liberapay: # Replace with your Liberapay username
+issuehunt: # Replace with your Issuehunt username
+otechie: # Replace with your OTEchie username
+lfx_crowdfunding: # Replace with your LFX Crowdfunding project-name
+custom:
+  - "https://ai-family.yyc3.top/sponsor"
+  - "https://www.buymeacoffee.com/yyc3"

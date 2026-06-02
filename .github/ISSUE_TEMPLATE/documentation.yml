@@ -1,0 +1,30 @@
+name: 📚 文档改进
+description: 报告文档错误或建议文档改进
+title: "[DOCS] "
+labels: ["documentation"]
+assignees: []
+body:
+  - type: textarea
+    id: location
+    attributes:
+      label: 📍 文档位置
+      description: 哪个文档需要改进？
+      placeholder: 例如：README.md 的"快速开始"部分
+    validations:
+      required: true
+
+  - type: textarea
+    id: issue
+    attributes:
+      label: 🔍 问题描述
+      description: 描述文档中存在的问题（错误、过期、缺失等）。
+    validations:
+      required: true
+
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 💡 改进建议
+      description: 描述你期望的改进内容。
+    validations:
+      required: true
