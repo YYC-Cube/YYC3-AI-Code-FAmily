@@ -61,3 +61,11 @@ declare module '@babel/standalone' {
   export function registerPreset(name: string, preset: unknown): void;
   export function registerPlugin(name: string, plugin: unknown): void;
 }
+
+declare global {
+  interface Window {
+    __insertCode: (code: string) => void;
+  }
+}
+
+export { };

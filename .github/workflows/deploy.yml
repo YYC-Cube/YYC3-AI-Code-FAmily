@@ -41,8 +41,11 @@ jobs:
       - name: Lint
         run: pnpm run lint
 
-      - name: Build
-        run: pnpm run build
+      - name: Test
+        run: pnpm run test --run
+
+      - name: Build (without typecheck — already done above)
+        run: pnpm exec vite build
 
       - name: Generate 404.html for SPA routing
         run: cp dist/index.html dist/404.html

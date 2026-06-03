@@ -7,7 +7,9 @@
  */
 
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 @import "tw-animate-css";
+@import 'katex/dist/katex.min.css';
 @import './styles/fonts.css';
 @import './styles/theme.css';
 @import './styles/liquid-glass.css';
