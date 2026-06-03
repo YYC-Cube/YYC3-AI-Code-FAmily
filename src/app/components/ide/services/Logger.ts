@@ -22,6 +22,7 @@ class Logger {
   debug(message: string, data?: unknown, source?: string): void {
     if (this.isDevelopment) {
       const formatted = this.formatMessage('debug', message, source)
+      // eslint-disable-next-line no-console
       console.debug(formatted, data);
     }
   }
@@ -29,6 +30,7 @@ class Logger {
   info(message: string, data?: unknown, source?: string): void {
     if (this.isDevelopment) {
       const formatted = this.formatMessage('info', message, source)
+      // eslint-disable-next-line no-console
       console.info(formatted, data);
     }
   }
