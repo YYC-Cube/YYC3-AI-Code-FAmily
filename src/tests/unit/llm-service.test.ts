@@ -8,11 +8,6 @@
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { resetLocalStorage } from '../../tests/setup';
 
-// 使用 vi.hoisted 在模块加载前设置环境变量
-vi.hoisted(() => {
-  process.env.VITE_ZHIPU_API_KEY = 'sk-from-env';
-});
-
 describe('LLMService — LLM API 调用层', () => {
   beforeEach(() => {
     resetLocalStorage();
@@ -124,10 +119,12 @@ describe('LLMService — LLM API 调用层', () => {
     });
 
     it('TC-LLM-023: initialApiKeysFromEnv 从 import.meta.env 读取', async () => {
-      const { initializeApiKeysFromEnv, getApiKey, setApiKey } = await import('../../app/components/ide/LLMService');
-      setApiKey('zai-plan', '');
+      const { initializeApiKeysFromEnv, getApiKey } = await import('../../app/components/ide/LLMService');
+      // vi.stubEnv 正确模拟 import.meta.env（Vite 环境变量）
+      vi.stubEnv('VITE_ZHIPU_API_KEY', 'sk-from-env');
       initializeApiKeysFromEnv();
       expect(getApiKey('zai-plan')).toBe('sk-from-env');
+      vi.unstubAllEnvs();
     });
   });
 
